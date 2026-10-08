@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Handbook | BSc LT</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f4f7fb;
+      color: #1a1a1a;
+      min-height: 100vh;
+      padding-bottom: 40px;
+    }
+
+    header {
+      background: linear-gradient(180deg, #0a2e5c 0%, #1e4d8c 100%);
+      color: #fff;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .back-btn {
+      color: #fff;
+      text-decoration: none;
+      font-size: 22px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    header h1 { font-size: 17px; font-weight: 600; }
+    header p { font-size: 12px; color: #c9dcf5; }
+
+    .intro {
+      max-width: 700px;
+      margin: 20px auto;
+      padding: 0 20px;
+      text-align: center;
+      font-size: 14px;
+      color: #4a5568;
+      line-height: 1.6;
+    }
+
+    /* Download handbook card */
+    .download-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: linear-gradient(135deg, #0a2e5c, #1e4d8c);
+      color: #fff;
+      max-width: 700px;
+      margin: 0 auto 24px;
+      padding: 20px;
+      border-radius: 14px;
+      text-decoration: none;
+      box-shadow: 0 6px 20px rgba(10, 46, 92, 0.25);
+    }
+
+    .download-card .icon {
+      font-size: 32px;
+      width: 56px;
+      height: 56px;
+      background: #ffc72c;
+      color: #0a2e5c;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .download-card .text { flex: 1; }
+    .download-card .text strong {
+      display: block;
+      font-size: 15px;
+      margin-bottom: 3px;
+    }
+    .download-card .text span {
+      font-size: 12px;
+      color: #c9dcf5;
+    }
+    .download-card .arrow {
+      font-size: 22px;
+      color: #ffc72c;
+    }
+
+    .section-title {
+      max-width: 700px;
+      margin: 30px auto 14px;
+      padding: 0 20px;
+      font-size: 15px;
+      font-weight: 700;
+      color: #0a2e5c;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title::before {
+      content: '';
+      width: 4px;
+      height: 18px;
+      background: #ffc72c;
+      border-radius: 2px;
+    }
+
+    .people {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .person {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: #fff;
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 2px 8px rgba(10, 46, 92, 0.06);
+    }
+
+    .person .avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #0a2e5c, #1e4d8c);
+      color: #ffc72c;
+      font-size: 20px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .person .info { flex: 1; min-width: 0; }
+
+    .person .role {
+      font-size: 11px;
+      color: #ffc72c;
+      background: #0a2e5c;
+      padding: 2px 8px;
+      border-radius: 5px;
+      display: inline-block;
+      margin-bottom: 5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .person .name {
+      font-size: 15px;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 2px;
+    }
+
+    .person .contact {
+      font-size: 12px;
+      color: #7a8699;
+      word-break: break-all;
+    }
+
+    .about-box {
+      max-width: 700px;
+      margin: 30px auto 0;
+      padding: 20px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(10, 46, 92, 0.06);
+      font-size: 14px;
+      line-height: 1.7;
+      color: #4a5568;
+    }
+
+    .about-box h3 {
+      font-size: 15px;
+      color: #0a2e5c;
+      margin-bottom: 10px;
+    }
+
+    .about-box p { margin-bottom: 10px; }
+    .about-box p:last-child { margin-bottom: 0; }
+
+    .edit-note {
+      max-width: 700px;
+      margin: 24px auto 0;
+      padding: 14px 18px;
+      background: #fff8e1;
+      border-left: 4px solid #ffc72c;
+      border-radius: 8px;
+      font-size: 13px;
+      color: #6b5a1a;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="back-btn">←</a>
+    <div>
+      <h1>Student Handbook</h1>
+      <p>Everything About the Programme</p>
+    </div>
+  </header>
+
+  <p class="intro">
+    Your complete guide to the BSc Laboratory Technology programme — leadership,
+    regulations, and essential information.
+  </p>
+
+  <!-- Download the handbook PDF -->
+  <div style="padding: 0 20px;">
+    <a class="download-card" href="#">
+      <div class="icon">📘</div>
+      <div class="text">
+        <strong>Download Full Handbook</strong>
+        <span>PDF • Complete Student Guide</span>
+      </div>
+      <div class="arrow">⬇</div>
+    </a>
+  </div>
+
+  <!-- ============ DEPARTMENT LEADERS ============ -->
+  <h2 class="section-title">Department Leadership</h2>
+  <div class="people">
+
+    <div class="person">
+      <div class="avatar">HOD</div>
+      <div class="info">
+        <span class="role">Head of Department</span>
+        <div class="name">Dr. [HOD's Full Name]</div>
+        <div class="contact">hod.labtech@ucc.edu.gh</div>
+      </div>
+    </div>
+
+    <div class="person">
+      <div class="avatar">VH</div>
+      <div class="info">
+        <span class="role">Vice / Assistant HOD</span>
+        <div class="name">Dr. [Vice HOD's Name]</div>
+        <div class="contact">vicehod.labtech@ucc.edu.gh</div>
+      </div>
+    </div>
+
+    <div class="person">
+      <div class="avatar">EX</div>
+      <div class="info">
+        <span class="role">Examinations Officer</span>
+        <div class="name">Mr./Mrs. [Name]</div>
+        <div class="contact">exams.labtech@ucc.edu.gh</div>
+      </div>
+    </div>
+
+    <div class="person">
+      <div class="avatar">CO</div>
+      <div class="info">
+        <span class="role">Course Coordinator</span>
+        <div class="name">Mr./Mrs. [Name]</div>
+        <div class="contact">coordinator.labtech@ucc.edu.gh</div>
+      </div>
+    </div>
+
+    <div class="person">
+      <div class="avatar">SA</div>
+      <div class="info">
+        <span class="role">Student Advisor</span>
+        <div class="name">Mr./Mrs. [Name]</div>
+        <div class="contact">advisor.labtech@ucc.edu.gh</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============ STUDENT LEADERS ============ -->
+  <h2 class="section-title">Student Leadership</h2>
+  <div class="people">
+
+    <div class="person">
+      <div class="avatar">PR</div>
+      <div class="info">
+        <span class="role">President</span>
+        <div class="name">[Current President's Name]</div>
+        <div class="contact">president.labtech@stu.ucc.edu.gh</div>
+      </div>
+    </div>
+
+    <div class="person">
+      <div class="avatar">VP</div>
+      <div class="info">
+        <span class="role">Vice President</span>
+        <div class="name">[Current VP's Name]</div>
+        <div class="contact">vp.labtech@stu.ucc.edu.gh</div>
+      </div>
+    </div>
+
+    <div class="person">
+      <div class="avatar">GS</div>
+      <div class="info">
+        <span class="role">General Secretary</span>
+        <div class="name">[Current Secretary's Name]</div>
+        <div class="contact">secretary.labtech@stu.ucc.edu.gh</div>
+      </div>
+    </div>
+
+    <div class="person">
+      <div class="avatar">TR</div>
+      <div class="info">
+        <span class="role">Treasurer</span>
+        <div class="name">[Current Treasurer's Name]</div>
+        <div class="contact">treasurer.labtech@stu.ucc.edu.gh</div>
+      </div>
+    </div>
+
+    <div class="person">
+      <div class="avatar">OR</div>
+      <div class="info">
+        <span class="role">Organiser</span>
+        <div class="name">[Current Organiser's Name]</div>
+        <div class="contact">organiser.labtech@stu.ucc.edu.gh</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============ ABOUT THE PROGRAMME ============ -->
+  <h2 class="section-title">About the Programme</h2>
+  <div class="about-box">
+    <h3>BSc Laboratory Technology — Overview</h3>
+    <p>
+      The BSc Laboratory Technology programme at the University of Cape Coast
+      trains competent laboratory scientists for careers in medical,
+      industrial, research, and educational laboratories. Students gain
+      hands-on skills in analytical chemistry, microbiology, haematology,
+      clinical chemistry, instrumentation, and advanced diagnostic techniques.
+    </p>
+    <p>
+      The four-year programme combines classroom learning with practical
+      laboratory sessions, industrial attachment, and a final-year research
+      project to prepare graduates for professional practice.
+    </p>
+    <h3 style="margin-top: 18px;">Programme Duration</h3>
+    <p>4 years (8 semesters) • Full-time • BSc Degree</p>
+  </div>
+
+  <div class="edit-note">
+    ✏️ <strong>To update:</strong> Replace the <em>[names]</em> and emails with
+    the real details of your department's current leadership. Just edit this
+    file on GitHub.
+  </div>
+
+</body>
+</html>
