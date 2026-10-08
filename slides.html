@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Course Slides & Past Questions | BSc LT</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f4f7fb;
+      color: #1a1a1a;
+      min-height: 100vh;
+      padding-bottom: 40px;
+    }
+
+    header {
+      background: linear-gradient(180deg, #0a2e5c 0%, #1e4d8c 100%);
+      color: #fff;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .back-btn {
+      color: #fff;
+      text-decoration: none;
+      font-size: 22px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    header h1 { font-size: 17px; font-weight: 600; }
+    header p { font-size: 12px; color: #c9dcf5; }
+
+    .intro {
+      max-width: 700px;
+      margin: 20px auto;
+      padding: 0 20px;
+      text-align: center;
+      font-size: 14px;
+      color: #4a5568;
+      line-height: 1.6;
+    }
+
+    /* Top-level tabs (Slides vs Past Questions) */
+    .main-tabs {
+      display: flex;
+      max-width: 700px;
+      margin: 0 auto 20px;
+      padding: 0 20px;
+      gap: 10px;
+    }
+
+    .main-tab {
+      flex: 1;
+      padding: 14px;
+      text-align: center;
+      border-radius: 12px;
+      background: #fff;
+      border: 2px solid #d6e0ee;
+      color: #0a2e5c;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .main-tab.active {
+      background: #0a2e5c;
+      color: #fff;
+      border-color: #0a2e5c;
+    }
+
+    /* Year sub-tabs */
+    .year-tabs {
+      display: flex;
+      overflow-x: auto;
+      gap: 8px;
+      padding: 0 20px 15px;
+      max-width: 700px;
+      margin: 0 auto;
+      scrollbar-width: none;
+    }
+
+    .year-tabs::-webkit-scrollbar { display: none; }
+
+    .year-tab {
+      flex-shrink: 0;
+      padding: 8px 16px;
+      border-radius: 20px;
+      background: #fff;
+      border: 2px solid #d6e0ee;
+      color: #0a2e5c;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .year-tab.active {
+      background: #ffc72c;
+      color: #0a2e5c;
+      border-color: #ffc72c;
+    }
+
+    .content-area {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .section { display: none; }
+    .section.active { display: block; }
+
+    .year-block { display: none; }
+    .year-block.active { display: block; }
+
+    .file-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: #fff;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 12px;
+      text-decoration: none;
+      color: #1a1a1a;
+      box-shadow: 0 2px 8px rgba(10, 46, 92, 0.06);
+      border-left: 4px solid #0a2e5c;
+      transition: all 0.2s;
+    }
+
+    .file-card:active {
+      transform: scale(0.98);
+      border-left-color: #ffc72c;
+    }
+
+    .file-icon {
+      font-size: 26px;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #e8f0fb;
+      border-radius: 10px;
+      flex-shrink: 0;
+    }
+
+    .file-info { flex: 1; min-width: 0; }
+
+    .file-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 3px;
+    }
+
+    .file-meta {
+      font-size: 12px;
+      color: #7a8699;
+    }
+
+    .download-btn {
+      font-size: 20px;
+      color: #0a2e5c;
+      flex-shrink: 0;
+    }
+
+    .empty-note {
+      text-align: center;
+      padding: 40px 20px;
+      color: #7a8699;
+      font-size: 14px;
+      background: #fff;
+      border-radius: 12px;
+      border: 2px dashed #d6e0ee;
+    }
+
+    .empty-note strong {
+      color: #0a2e5c;
+      display: block;
+      margin-bottom: 6px;
+      font-size: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="back-btn">←</a>
+    <div>
+      <h1>Course Materials</h1>
+      <p>Slides & Past Questions</p>
+    </div>
+  </header>
+
+  <p class="intro">
+    Download lecture slides and past examination questions, organised by year
+    and semester.
+  </p>
+
+  <div class="main-tabs">
+    <div class="main-tab active" onclick="showSection('slides', this)">📚 Slides</div>
+    <div class="main-tab" onclick="showSection('past', this)">📝 Past Questions</div>
+  </div>
+
+  <div class="year-tabs">
+    <button class="year-tab active" onclick="showYear('slides', 'y1', this)">Year 1</button>
+    <button class="year-tab" onclick="showYear('slides', 'y2', this)">Year 2</button>
+    <button class="year-tab" onclick="showYear('slides', 'y3', this)">Year 3</button>
+    <button class="year-tab" onclick="showYear('slides', 'y4', this)">Year 4</button>
+  </div>
+
+  <div class="content-area">
+
+    <!-- ========== SLIDES SECTION ========== -->
+    <div id="slides" class="section active">
+      <div id="slides-y1" class="year-block active">
+        <a class="file-card" href="#">
+          <div class="file-icon">📄</div>
+          <div class="file-info">
+            <div class="file-title">LTC 101 – Introduction to Laboratory Technology</div>
+            <div class="file-meta">PDF • Week 1–4 Slides</div>
+          </div>
+          <div class="download-btn">⬇</div>
+        </a>
+        <a class="file-card" href="#">
+          <div class="file-icon">📄</div>
+          <div class="file-info">
+            <div class="file-title">BIO 101 – General Biology I</div>
+            <div class="file-meta">PDF • Full Semester</div>
+          </div>
+          <div class="download-btn">⬇</div>
+        </a>
+        <div class="empty-note">
+          <strong>More slides coming soon</strong>
+          Upload files to the repository and link them here.
+        </div>
+      </div>
+
+      <div id="slides-y2" class="year-block">
+        <div class="empty-note">
+          <strong>Year 2 slides coming soon</strong>
+          Upload files and update this section.
+        </div>
+      </div>
+
+      <div id="slides-y3" class="year-block">
+        <div class="empty-note">
+          <strong>Year 3 slides coming soon</strong>
+          Upload files and update this section.
+        </div>
+      </div>
+
+      <div id="slides-y4" class="year-block">
+        <div class="empty-note">
+          <strong>Year 4 slides coming soon</strong>
+          Upload files and update this section.
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== PAST QUESTIONS SECTION ========== -->
+    <div id="past" class="section">
+      <div id="past-y1" class="year-block active">
+        <div class="empty-note">
+          <strong>Year 1 past questions coming soon</strong>
+          Upload files and update this section.
+        </div>
+      </div>
+      <div id="past-y2" class="year-block">
+        <div class="empty-note">
+          <strong>Year 2 past questions coming soon</strong>
+          Upload files and update this section.
+        </div>
+      </div>
+      <div id="past-y3" class="year-block">
+        <div class="empty-note">
+          <strong>Year 3 past questions coming soon</strong>
+          Upload files and update this section.
+        </div>
+      </div>
+      <div id="past-y4" class="year-block">
+        <div class="empty-note">
+          <strong>Year 4 past questions coming soon</strong>
+          Upload files and update this section.
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    let currentSection = 'slides';
+
+    function showSection(sectionId, btn) {
+      currentSection = sectionId;
+      document.querySelectorAll('.section').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.main-tab').forEach(el => el.classList.remove('active'));
+      document.getElementById(sectionId).classList.add('active');
+      btn.classList.add('active');
+
+      // Reset year tabs to Year 1 when switching sections
+      document.querySelectorAll('.year-tab').forEach((el, i) => {
+        el.classList.toggle('active', i === 0);
+      });
+      document.querySelectorAll('.year-block').forEach(el => el.classList.remove('active'));
+      document.getElementById(sectionId + '-y1').classList.add('active');
+    }
+
+    function showYear(sectionId, yearId, btn) {
+      document.querySelectorAll('.year-tab').forEach(el => el.classList.remove('active'));
+      btn.classList.add('active');
+
+      document.querySelectorAll('#' + sectionId + ' .year-block').forEach(el => {
+        el.classList.remove('active');
+      });
+      document.getElementById(sectionId + '-' + yearId).classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
