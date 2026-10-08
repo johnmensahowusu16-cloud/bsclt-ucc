@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Course Structure | BSc Laboratory Technology</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f4f7fb;
+      color: #1a1a1a;
+      min-height: 100vh;
+      padding-bottom: 40px;
+    }
+
+    header {
+      background: linear-gradient(180deg, #0a2e5c 0%, #1e4d8c 100%);
+      color: #fff;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .back-btn {
+      color: #fff;
+      text-decoration: none;
+      font-size: 22px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    header h1 {
+      font-size: 17px;
+      font-weight: 600;
+    }
+
+    header p {
+      font-size: 12px;
+      color: #c9dcf5;
+    }
+
+    .intro {
+      max-width: 700px;
+      margin: 20px auto;
+      padding: 0 20px;
+      text-align: center;
+      font-size: 14px;
+      color: #4a5568;
+      line-height: 1.6;
+    }
+
+    .tabs {
+      display: flex;
+      overflow-x: auto;
+      gap: 8px;
+      padding: 15px 20px;
+      max-width: 700px;
+      margin: 0 auto;
+      scrollbar-width: none;
+    }
+
+    .tabs::-webkit-scrollbar { display: none; }
+
+    .tab {
+      flex-shrink: 0;
+      padding: 10px 18px;
+      border-radius: 20px;
+      background: #fff;
+      border: 2px solid #d6e0ee;
+      color: #0a2e5c;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .tab.active {
+      background: #0a2e5c;
+      color: #fff;
+      border-color: #0a2e5c;
+    }
+
+    .year-content {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .semester {
+      margin-bottom: 24px;
+    }
+
+    .semester-title {
+      background: #ffc72c;
+      color: #0a2e5c;
+      padding: 12px 18px;
+      border-radius: 10px 10px 0 0;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    .course-list {
+      background: #fff;
+      border-radius: 0 0 10px 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(10, 46, 92, 0.08);
+    }
+
+    .course {
+      padding: 15px 18px;
+      border-bottom: 1px solid #eef2f7;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .course:last-child { border-bottom: none; }
+
+    .course .code {
+      background: #e8f0fb;
+      color: #0a2e5c;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 8px;
+      border-radius: 6px;
+      white-space: nowrap;
+      margin-top: 2px;
+    }
+
+    .course .details { flex: 1; }
+
+    .course .name {
+      font-size: 14px;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 3px;
+    }
+
+    .course .credits {
+      font-size: 12px;
+      color: #7a8699;
+    }
+
+    .year-content { display: none; }
+    .year-content.active { display: block; }
+
+    .note {
+      max-width: 700px;
+      margin: 30px auto 0;
+      padding: 16px 20px;
+      background: #fff8e1;
+      border-left: 4px solid #ffc72c;
+      border-radius: 8px;
+      font-size: 13px;
+      color: #6b5a1a;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="back-btn">←</a>
+    <div>
+      <h1>Course Structure</h1>
+      <p>4-Year Programme Outline</p>
+    </div>
+  </header>
+
+  <p class="intro">
+    Below is the full outline of courses for each year and semester of the
+    BSc Laboratory Technology programme at the University of Cape Coast.
+  </p>
+
+  <div class="tabs">
+    <button class="tab active" onclick="showYear('y1', this)">Year 1</button>
+    <button class="tab" onclick="showYear('y2', this)">Year 2</button>
+    <button class="tab" onclick="showYear('y3', this)">Year 3</button>
+    <button class="tab" onclick="showYear('y4', this)">Year 4</button>
+  </div>
+
+  <!-- ================= YEAR 1 ================= -->
+  <div id="y1" class="year-content active">
+    <div class="semester">
+      <div class="semester-title">Semester 1</div>
+      <div class="course-list">
+        <div class="course"><span class="code">LTC 101</span><div class="details"><div class="name">Introduction to Laboratory Technology</div><div class="credits">3 Credits</div></div></div>
+        <div class="course"><span class="code">BIO 101</span><div class="details"><div class="name">General Biology I</div><div class="credits">3 Credits</div></div></div>
+        <div class="course"><span class="code">CHE 101</span><div class="details"><div class="name">General Chemistry I</div><div class="credits">3 Credits</div></div></div>
+        <div class="course"><span class="code">MAT 101</span><div class="details"><div class="name">Algebra & Trigonometry</div><div class="credits">3 Credits</div></div></div>
+        <div class="course"><span class="code">PHY 101</span><div class="details"><div class="name">General Physics I</div><div class="credits">3 Credits</div></div></div>
+        <div class="course"><span class="code">UGRC 110</span><div class="details"><div class="name">Academic Writing I</div><div class="credits">2 Credits</div></div></div>
+      </div>
+    </div>
+
+    <div class="semester">
+      <div class="semester-title">Semester 2</div>
+      <div class="course-list">
+        <div class="course"><span class="code">LTC 102</span><div class="details"><div class="name">Laboratory Safety & Ethics</div><div class="credits">3 Credits</div></div></div>
+        <div class="course"><span class="code">BIO 102</span><div class="details"><div class="name">General Biology II</div><div class="credits">3 Credits</div></div></div>
+        <div class="course"><span class="code">CHE 102</span><div class="details"><div class="name">General Chemistry II</div><div class="credits">3 Credits</div></div></div>
+        <div class="course"><span class="code">MAT 102</span><div class="details"><div class="name">Calculus I</div><div class="credits">3 Credits</div></div></div>
+        <div class="course"><span class="code">PHY 102</span><div class="details"><div class="name">General Physics II</div><div class="credits">3 Credits</div></div></div>
+        <div class="course"><span class="code">UGRC 120</span><div class="details"><div class="name">Academic Writing II</div><div class="credits">2 Credits</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= YEAR 2 ================= -->
+  <div id="y2" class="year-content">
+    <div class="semester">
+      <div class="semester-title">Semester 1</div>
+      <div class="course-list">
+        <div class="course"><span class="code">LTC 201</span><div class="details"><div class="name">Analytical Chemistry</div><div class="credits">3 Credits</div></div></div>
+        <div class="course"><span class="code">LTC 203</span><div class="details"><div class="name">Microbiology Techniques</div><div class="credits">3 Credits</div></div></div>
+        <div class="course"><span class="code">LTC 205</span><div class="details"><div class="name">Instrumentation I</div><div class="credits">3 Credits</div></div></div>
+        <div class="course"><span class="code">CHE 201</span><div class="details"><div class="name">Organic Chemistry I</div><div class="credits">3 Credits</div></div></div>
+        <div class="course"><span class="code">BIO 201</span><div class="details"><div class="name">Cell Biology</div><div class="credits">3 Credits</div></div></div>
+      </div>
+    </div>
+
+    <div class="semester">
+      <div class="semester-title">Semester 2</div>
+      <div class="course-list">
+        <div class="course"><span class="code">LTC 202</span><div class="details"><div class="name">Biochemistry</div><div class="credits">3 Credits</div></div></div>
+        <div class="course"><span class="code">LTC 204</span><div class="details"><div class="name">Instrumentation II</div><div class="credits">3 Credits</div></div></div>
+        <div class="course"><span class="code">LTC 206</span><div class="details"><div class="name">Haematology</div><div class="credits">3 Credits</div></div></div>
+        <div class="course"><span class="code">CHE 202</span><div class="details"><div class="name">Organic Chemistry II</div><div class="credits">3 Credits</div></div></div>
+        <div class="course"><span class="code">STA 202</span><div class="details"><div class="name">Statistics for Science</div><div class="credits">3 Credits</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= YEAR 3 ================= -->
+  <div id="y3" class="year-content">
+    <div class="semester">
+      <div class="semester-title">Semester 1</div>
+      <div class="course-list">
+        <div class="course"><span class="code">LTC 301</span><div class="details"><div class="name">Clinical Chemistry</div><div class="credits">3 Credits</div></div></div>
+        <div class="course"><span class="code">LTC 303</span><div class="details"><div class="name">Histopathology</div><div class="credits">3 Credits</div></div></div>
+        <div class="course"><span class="code">LTC 305</span><div class="details"><div class="name">Medical Microbiology</div><div class="credits">3 Credits</div></div></div>
+        <div class="course"><span class="code">LTC 307</span><div class="details"><div class="name">Research Methods</div><div class="credits">3 Credits</div></div></div>
+      </div>
+    </div>
+
+    <div class="semester">
+      <div class="semester-title">Semester 2</div>
+      <div class="course-list">
+        <div class="course"><span class="code">LTC 302</span><div class="details"><div class="name">Immunology & Serology</div><div class="credits">3 Credits</div></div></div>
+        <div class="course"><span class="code">LTC 304</span><div class="details"><div class="name">Parasitology</div><div class="credits">3 Credits</div></div></div>
+        <div class="course"><span class="code">LTC 306</span><div class="details"><div class="name">Blood Transfusion Science</div><div class="credits">3 Credits</div></div></div>
+        <div class="course"><span class="code">LTC 308</span><div class="details"><div class="name">Industrial Attachment</div><div class="credits">3 Credits</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= YEAR 4 ================= -->
+  <div id="y4" class="year-content">
+    <div class="semester">
+      <div class="semester-title">Semester 1</div>
+      <div class="course-list">
+        <div class="course"><span class="code">LTC 401</span><div class="details"><div class="name">Advanced Laboratory Management</div><div class="credits">3 Credits</div></div></div>
+        <div class="course"><span class="code">LTC 403</span><div class="details"><div class="name">Quality Control & Assurance</div><div class="credits">3 Credits</div></div></div>
+        <div class="course"><span class="code">LTC 405</span><div class="details"><div class="name">Molecular Biology Techniques</div><div class="credits">3 Credits</div></div></div>
+        <div class="course"><span class="code">LTC 407</span><div class="details"><div class="name">Research Project I</div><div class="credits">3 Credits</div></div></div>
+      </div>
+    </div>
+
+    <div class="semester">
+      <div class="semester-title">Semester 2</div>
+      <div class="course-list">
+        <div class="course"><span class="code">LTC 402</span><div class="details"><div class="name">Entrepreneurship in Lab Science</div><div class="credits">3 Credits</div></div></div>
+        <div class="course"><span class="code">LTC 404</span><div class="details"><div class="name">Advanced Diagnostic Techniques</div><div class="credits">3 Credits</div></div></div>
+        <div class="course"><span class="code">LTC 406</span><div class="details"><div class="name">Research Project II</div><div class="credits">3 Credits</div></div></div>
+        <div class="course"><span class="code">LTC 408</span><div class="details"><div class="name">Seminar & Presentation</div><div class="credits">2 Credits</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="note">
+    📝 <strong>Note:</strong> The courses above are a sample template. You'll need
+    to replace them with the official curriculum from your department. Just tell
+    me the real courses and I'll update this file for you!
+  </div>
+
+  <script>
+    function showYear(yearId, btn) {
+      document.querySelectorAll('.year-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+      document.getElementById(yearId).classList.add('active');
+      btn.classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
