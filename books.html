@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Library | BSc LT</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f4f7fb;
+      color: #1a1a1a;
+      min-height: 100vh;
+      padding-bottom: 40px;
+    }
+
+    header {
+      background: linear-gradient(180deg, #0a2e5c 0%, #1e4d8c 100%);
+      color: #fff;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .back-btn {
+      color: #fff;
+      text-decoration: none;
+      font-size: 22px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    header h1 { font-size: 17px; font-weight: 600; }
+    header p { font-size: 12px; color: #c9dcf5; }
+
+    .intro {
+      max-width: 700px;
+      margin: 20px auto;
+      padding: 0 20px;
+      text-align: center;
+      font-size: 14px;
+      color: #4a5568;
+      line-height: 1.6;
+    }
+
+    /* Search bar */
+    .search-wrap {
+      max-width: 700px;
+      margin: 0 auto 20px;
+      padding: 0 20px;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 14px 18px;
+      border-radius: 12px;
+      border: 2px solid #d6e0ee;
+      background: #fff;
+      font-size: 15px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .search-input:focus {
+      border-color: #0a2e5c;
+    }
+
+    /* Category tabs */
+    .category-tabs {
+      display: flex;
+      overflow-x: auto;
+      gap: 8px;
+      padding: 0 20px 16px;
+      max-width: 700px;
+      margin: 0 auto;
+      scrollbar-width: none;
+    }
+
+    .category-tabs::-webkit-scrollbar { display: none; }
+
+    .cat-tab {
+      flex-shrink: 0;
+      padding: 9px 16px;
+      border-radius: 20px;
+      background: #fff;
+      border: 2px solid #d6e0ee;
+      color: #0a2e5c;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .cat-tab.active {
+      background: #0a2e5c;
+      color: #fff;
+      border-color: #0a2e5c;
+    }
+
+    .book-list {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .book-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 2px 10px rgba(10, 46, 92, 0.06);
+      display: flex;
+      gap: 14px;
+      border-left: 4px solid #0a2e5c;
+      transition: all 0.2s;
+    }
+
+    .book-cover {
+      width: 56px;
+      height: 72px;
+      background: linear-gradient(135deg, #0a2e5c, #1e4d8c);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffc72c;
+      font-size: 26px;
+      flex-shrink: 0;
+      box-shadow: 2px 2px 8px rgba(10, 46, 92, 0.25);
+    }
+
+    .book-info {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .book-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 4px;
+      line-height: 1.35;
+    }
+
+    .book-author {
+      font-size: 12px;
+      color: #4a5568;
+      margin-bottom: 8px;
+      font-style: italic;
+    }
+
+    .book-meta {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
+
+    .tag {
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 5px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+    }
+
+    .tag-level {
+      background: #e8f0fb;
+      color: #0a2e5c;
+    }
+
+    .tag-cat {
+      background: #fff8e1;
+      color: #6b5a1a;
+    }
+
+    .book-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .book-btn {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .book-btn.view {
+      background: #0a2e5c;
+      color: #fff;
+    }
+
+    .book-btn.download {
+      background: #ffc72c;
+      color: #0a2e5c;
+    }
+
+    .book-btn:active { transform: scale(0.96); }
+
+    .empty-note {
+      text-align: center;
+      padding: 40px 20px;
+      color: #7a8699;
+      font-size: 14px;
+      background: #fff;
+      border-radius: 12px;
+      border: 2px dashed #d6e0ee;
+    }
+
+    .empty-note strong {
+      color: #0a2e5c;
+      display: block;
+      margin-bottom: 6px;
+      font-size: 15px;
+    }
+
+    .edit-note {
+      max-width: 700px;
+      margin: 30px auto 0;
+      padding: 14px 18px;
+      background: #fff8e1;
+      border-left: 4px solid #ffc72c;
+      border-radius: 8px;
+      font-size: 13px;
+      color: #6b5a1a;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="back-btn">←</a>
+    <div>
+      <h1>Book Library</h1>
+      <p>Recommended Textbooks & Resources</p>
+    </div>
+  </header>
+
+  <p class="intro">
+    A curated list of textbooks and reference materials for the BSc Laboratory
+    Technology programme. Search or filter by category.
+  </p>
+
+  <div class="search-wrap">
+    <input
+      class="search-input"
+      type="text"
+      id="searchBox"
+      placeholder="🔍 Search by title or author..."
+      oninput="filterBooks()"
+    >
+  </div>
+
+  <div class="category-tabs">
+    <button class="cat-tab active" onclick="filterCat('all', this)">All Books</button>
+    <button class="cat-tab" onclick="filterCat('chemistry', this)">Chemistry</button>
+    <button class="cat-tab" onclick="filterCat('biology', this)">Biology</button>
+    <button class="cat-tab" onclick="filterCat('microbiology', this)">Microbiology</button>
+    <button class="cat-tab" onclick="filterCat('clinical', this)">Clinical</button>
+    <button class="cat-tab" onclick="filterCat('general', this)">General</button>
+  </div>
+
+  <div class="book-list" id="bookList">
+
+    <!-- ============ CHEMISTRY ============ -->
+    <div class="book-card" data-cat="chemistry" data-title="Analytical Chemistry" data-author="Skoog">
+      <div class="book-cover">🧪</div>
+      <div class="book-info">
+        <div class="book-title">Fundamentals of Analytical Chemistry</div>
+        <div class="book-author">by Skoog, West, Holler & Crouch</div>
+        <div class="book-meta">
+          <span class="tag tag-level">Year 2</span>
+          <span class="tag tag-cat">Chemistry</span>
+        </div>
+        <div class="book-actions">
+          <a class="book-btn view" href="#">View</a>
+          <a class="book-btn download" href="#">Download</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="book-card" data-cat="chemistry" data-title="Organic Chemistry" data-author="Clayden">
+      <div class="book-cover">🧪</div>
+      <div class="book-info">
+        <div class="book-title">Organic Chemistry</div>
+        <div class="book-author">by Clayden, Greeves & Warren</div>
+        <div class="book-meta">
+          <span class="tag tag-level">Year 1–2</span>
+          <span class="tag tag-cat">Chemistry</span>
+        </div>
+        <div class="book-actions">
+          <a class="book-btn view" href="#">View</a>
+          <a class="book-btn download" href="#">Download</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ BIOLOGY ============ -->
+    <div class="book-card" data-cat="biology" data-title="Cell Biology" data-author="Alberts">
+      <div class="book-cover">🧬</div>
+      <div class="book-info">
+        <div class="book-title">Molecular Biology of the Cell</div>
+        <div class="book-author">by Alberts, Johnson, Lewis et al.</div>
+        <div class="book-meta">
+          <span class="tag tag-level">Year 2</span>
+          <span class="tag tag-cat">Biology</span>
+        </div>
+        <div class="book-actions">
+          <a class="book-btn view" href="#">View</a>
+          <a class="book-btn download" href="#">Download</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ MICROBIOLOGY ============ -->
+    <div class="book-card" data-cat="microbiology" data-title="Microbiology" data-author="Prescott">
+      <div class="book-cover">🦠</div>
+      <div class="book-info">
+        <div class="book-title">Prescott's Microbiology</div>
+        <div class="book-author">by Willey, Sherwood & Woolverton</div>
+        <div class="book-meta">
+          <span class="tag tag-level">Year 2–3</span>
+          <span class="tag tag-cat">Microbiology</span>
+        </div>
+        <div class="book-actions">
+          <a class="book-btn view" href="#">View</a>
+          <a class="book-btn download" href="#">Download</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="book-card" data-cat="microbiology" data-title="Medical Microbiology" data-author="Murray">
+      <div class="book-cover">🦠</div>
+      <div class="book-info">
+        <div class="book-title">Medical Microbiology</div>
+        <div class="book-author">by Murray, Rosenthal & Pfaller</div>
+        <div class="book-meta">
+          <span class="tag tag-level">Year 3</span>
+          <span class="tag tag-cat">Microbiology</span>
+        </div>
+        <div class="book-actions">
+          <a class="book-btn view" href="#">View</a>
+          <a class="book-btn download" href="#">Download</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ CLINICAL ============ -->
+    <div class="book-card" data-cat="clinical" data-title="Clinical Chemistry" data-author="Bishop">
+      <div class="book-cover">🩸</div>
+      <div class="book-info">
+        <div class="book-title">Clinical Chemistry: Principles, Techniques & Correlations</div>
+        <div class="book-author">by Michael L. Bishop et al.</div>
+        <div class="book-meta">
+          <span class="tag tag-level">Year 3</span>
+          <span class="tag tag-cat">Clinical</span>
+        </div>
+        <div class="book-actions">
+          <a class="book-btn view" href="#">View</a>
+          <a class="book-btn download" href="#">Download</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="book-card" data-cat="clinical" data-title="Haematology" data-author="Hoffbrand">
+      <div class="book-cover">🩸</div>
+      <div class="book-info">
+        <div class="book-title">Essential Haematology</div>
+        <div class="book-author">by Hoffbrand & Moss</div>
+        <div class="book-meta">
+          <span class="tag tag-level">Year 2–3</span>
+          <span class="tag tag-cat">Clinical</span>
+        </div>
+        <div class="book-actions">
+          <a class="book-btn view" href="#">View</a>
+          <a class="book-btn download" href="#">Download</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ GENERAL ============ -->
+    <div class="book-card" data-cat="general" data-title="Lab Safety" data-author="Various">
+      <div class="book-cover">📘</div>
+      <div class="book-info">
+        <div class="book-title">Laboratory Safety: Principles and Practices</div>
+        <div class="book-author">by Diane O. Fleming et al.</div>
+        <div class="book-meta">
+          <span class="tag tag-level">Year 1</span>
+          <span class="tag tag-cat">General</span>
+        </div>
+        <div class="book-actions">
+          <a class="book-btn view" href="#">View</a>
+          <a class="book-btn download" href="#">Download</a>
+        </div>
+      </div>
+    </div>
+
+    <div id="noResults" class="empty-note" style="display:none;">
+      <strong>No books found</strong>
+      Try a different search term or category.
+    </div>
+
+  </div>
+
+  <div class="edit-note">
+    📚 <strong>Add your own books:</strong> Copy any <code>&lt;div class="book-card"&gt;</code> block above and edit the title, author, category, and year. Ask me for help when you're ready to link real files.
+  </div>
+
+  <script>
+    let currentCat = 'all';
+
+    function filterCat(cat, btn) {
+      currentCat = cat;
+      document.querySelectorAll('.cat-tab').forEach(el => el.classList.remove('active'));
+      btn.classList.add('active');
+      filterBooks();
+    }
+
+    function filterBooks() {
+      const query = document.getElementById('searchBox').value.toLowerCase();
+      const books = document.querySelectorAll('.book-card');
+      let visibleCount = 0;
+
+      books.forEach(book => {
+        const catMatch = currentCat === 'all' || book.dataset.cat === currentCat;
+        const text = (book.dataset.title + ' ' + book.dataset.author).toLowerCase();
+        const searchMatch = query === '' || text.includes(query);
+
+        if (catMatch && searchMatch) {
+          book.style.display = 'flex';
+          visibleCount++;
+        } else {
+          book.style.display = 'none';
+        }
+      });
+
+      document.getElementById('noResults').style.display =
+        visibleCount === 0 ? 'block' : 'none';
+    }
+  </script>
+
+</body>
+      </html>
