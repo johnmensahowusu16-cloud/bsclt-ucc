@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Submit a Complaint | BSc LT</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f4f7fb;
+      color: #1a1a1a;
+      min-height: 100vh;
+      padding-bottom: 40px;
+    }
+
+    header {
+      background: linear-gradient(180deg, #0a2e5c 0%, #1e4d8c 100%);
+      color: #fff;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .back-btn {
+      color: #fff;
+      text-decoration: none;
+      font-size: 22px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    header h1 { font-size: 17px; font-weight: 600; }
+    header p { font-size: 12px; color: #c9dcf5; }
+
+    .intro {
+      max-width: 700px;
+      margin: 24px auto 0;
+      padding: 0 20px;
+      text-align: center;
+    }
+
+    .intro h2 {
+      font-size: 22px;
+      color: #0a2e5c;
+      margin-bottom: 10px;
+    }
+
+    .intro p {
+      font-size: 14px;
+      color: #4a5568;
+      line-height: 1.6;
+    }
+
+    .big-btn {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      max-width: 600px;
+      margin: 28px auto 14px;
+      padding: 20px 22px;
+      background: linear-gradient(135deg, #0a2e5c, #1e4d8c);
+      border-radius: 14px;
+      text-decoration: none;
+      color: #fff;
+      box-shadow: 0 6px 20px rgba(10, 46, 92, 0.25);
+      transition: transform 0.2s;
+    }
+
+    .big-btn:active { transform: scale(0.98); }
+
+    .big-btn .icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      background: #ffc72c;
+      color: #0a2e5c;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      flex-shrink: 0;
+    }
+
+    .big-btn .text { flex: 1; }
+    .big-btn .text strong {
+      display: block;
+      font-size: 16px;
+      margin-bottom: 4px;
+    }
+    .big-btn .text span {
+      font-size: 12px;
+      color: #c9dcf5;
+    }
+
+    .big-btn .arrow {
+      font-size: 22px;
+      color: #ffc72c;
+    }
+
+    .pad-wrap { padding: 0 20px; }
+
+    .section-title {
+      max-width: 700px;
+      margin: 34px auto 14px;
+      padding: 0 20px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #0a2e5c;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title::before {
+      content: '';
+      width: 4px;
+      height: 18px;
+      background: #ffc72c;
+      border-radius: 2px;
+    }
+
+    .options {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .option {
+      background: #fff;
+      padding: 14px 16px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(10, 46, 92, 0.06);
+      font-size: 13px;
+      font-weight: 600;
+      color: #1a1a1a;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .option .icon {
+      font-size: 18px;
+    }
+
+    .info {
+      max-width: 700px;
+      margin: 30px auto 0;
+      padding: 18px 20px;
+      background: #fff8e1;
+      border-left: 4px solid #ffc72c;
+      border-radius: 8px;
+      font-size: 13px;
+      color: #6b5a1a;
+      line-height: 1.6;
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+
+    .info strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+      color: #4a3d0a;
+    }
+
+    .info ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .info li {
+      padding: 3px 0;
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .info li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: #1a7a3e;
+      font-weight: 700;
+    }
+
+    .emergency {
+      max-width: 700px;
+      margin: 20px auto 0;
+      padding: 18px 20px;
+      background: #fef2f2;
+      border-left: 4px solid #dc2626;
+      border-radius: 8px;
+      font-size: 13px;
+      color: #7f1d1d;
+      line-height: 1.6;
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+
+    .emergency strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="back-btn">←</a>
+    <div>
+      <h1>Submit a Complaint</h1>
+      <p>We're here to listen</p>
+    </div>
+  </header>
+
+  <div class="intro">
+    <h2>📝 Your Voice Matters</h2>
+    <p>
+      Submit any complaint, concern, or suggestion to the department.
+      You can submit anonymously, and every message is taken seriously.
+    </p>
+  </div>
+
+  <div class="pad-wrap">
+    <!-- REPLACE THE HREF BELOW WITH YOUR FORM LINK -->
+    <a class="big-btn"
+       href="REPLACE-WITH-YOUR-COMPLAINT-FORM-LINK"
+       target="_blank"
+       rel="noopener">
+      <div class="icon">📝</div>
+      <div class="text">
+        <strong>Open Complaint Form</strong>
+        <span>Secure • Anonymous option available</span>
+      </div>
+      <div class="arrow">›</div>
+    </a>
+  </div>
+
+  <h2 class="section-title">What You Can Report</h2>
+  <div class="options">
+    <div class="option"><span class="icon">🎓</span> Academic Issues</div>
+    <div class="option"><span class="icon">👨‍🏫</span> Teaching Concerns</div>
+    <div class="option"><span class="icon">🔬</span> Lab Facilities</div>
+    <div class="option"><span class="icon">🏛️</span> Student Leadership</div>
+    <div class="option"><span class="icon">🏠</span> Welfare / Accommodation</div>
+    <div class="option"><span class="icon">💡</span> Suggestions</div>
+  </div>
+
+  <div class="info">
+    <strong>📌 How It Works</strong>
+    <ul>
+      <li>Submit anonymously or with your details</li>
+      <li>Complaints go directly to department leadership</li>
+      <li>Expect a response within 3–5 working days</li>
+      <li>All complaints are treated confidentially</li>
+    </ul>
+  </div>
+
+  <div class="emergency">
+    <strong>⚠️ Emergency Situations</strong>
+    If you have an urgent safety, health, or security concern, please contact
+    the department office directly instead of using this form.
+  </div>
+
+</body>
+  </html>
