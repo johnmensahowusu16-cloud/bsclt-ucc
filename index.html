@@ -7,301 +7,541 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    html, body { height: 100%; }
-
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      color: #fff;
+      background: #f8fafc;
+      color: #0f172a;
       min-height: 100vh;
-      padding: 20px;
-      background: #0a1830;
-      position: relative;
-      overflow-x: hidden;
+      padding-bottom: 100px; /* space for bottom nav */
+      -webkit-tap-highlight-color: transparent;
     }
 
-    /* === ANIMATED BACKGROUND === */
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background:
-        radial-gradient(circle at 15% 10%, rgba(59, 130, 246, 0.35), transparent 45%),
-        radial-gradient(circle at 85% 20%, rgba(255, 199, 44, 0.18), transparent 45%),
-        radial-gradient(circle at 50% 90%, rgba(30, 77, 140, 0.6), transparent 55%),
-        linear-gradient(180deg, #071426 0%, #0a2040 50%, #061428 100%);
-      z-index: -2;
+    /* ============ TOP BAR ============ */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 20px 12px;
+      background: #f8fafc;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid #e2e8f0;
     }
 
-    /* Floating glow orbs */
-    body::after {
-      content: '';
-      position: fixed;
-      top: -100px;
-      right: -100px;
-      width: 300px;
-      height: 300px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(255, 199, 44, 0.25), transparent 70%);
-      filter: blur(40px);
-      z-index: -1;
-      animation: float 12s ease-in-out infinite;
+    .topbar .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
-    @keyframes float {
-      0%, 100% { transform: translate(0, 0); }
-      50% { transform: translate(-40px, 40px); }
-    }
-
-    /* === HEADER === */
-    header {
-      text-align: center;
-      padding: 30px 10px 25px;
-      animation: fadeDown 0.7s ease-out;
-    }
-
-    @keyframes fadeDown {
-      from { opacity: 0; transform: translateY(-15px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .logo-circle {
-      width: 90px;
-      height: 90px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #ffd966, #ffc72c, #e6a800);
+    .topbar .mini-logo {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #ffd966, #ffc72c);
       color: #0a1830;
-      font-size: 40px;
+      font-size: 16px;
       font-weight: 800;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 18px;
-      position: relative;
-      box-shadow:
-        0 8px 24px rgba(255, 199, 44, 0.5),
-        inset 0 -4px 12px rgba(0, 0, 0, 0.15),
-        inset 0 4px 12px rgba(255, 255, 255, 0.4);
-      animation: pulseGlow 3s ease-in-out infinite;
+      box-shadow: 0 4px 12px rgba(255, 199, 44, 0.4);
     }
 
-    @keyframes pulseGlow {
-      0%, 100% {
-        box-shadow:
-          0 8px 24px rgba(255, 199, 44, 0.5),
-          inset 0 -4px 12px rgba(0, 0, 0, 0.15),
-          inset 0 4px 12px rgba(255, 255, 255, 0.4);
-      }
-      50% {
-        box-shadow:
-          0 8px 40px rgba(255, 199, 44, 0.85),
-          inset 0 -4px 12px rgba(0, 0, 0, 0.15),
-          inset 0 4px 12px rgba(255, 255, 255, 0.4);
-      }
+    .topbar .brand-text strong {
+      display: block;
+      font-size: 14px;
+      color: #0a1830;
+      font-weight: 700;
     }
 
-    header h1 {
-      font-size: 25px;
+    .topbar .brand-text span {
+      font-size: 11px;
+      color: #64748b;
+    }
+
+    .topbar .menu-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: #0a1830;
+    }
+
+    /* ============ HERO WELCOME ============ */
+    .hero {
+      padding: 24px 20px 20px;
+      animation: fadeUp 0.6s ease-out;
+    }
+
+    .hero h1 {
+      font-size: 26px;
       font-weight: 800;
-      letter-spacing: 0.5px;
+      color: #0a1830;
+      letter-spacing: -0.3px;
       margin-bottom: 6px;
-      background: linear-gradient(135deg, #fff, #c9dcf5);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      line-height: 1.2;
     }
 
-    header p {
-      font-size: 13px;
-      color: #8fb2d9;
-      font-weight: 400;
-      letter-spacing: 0.3px;
+    .hero h1 .wave {
+      display: inline-block;
+      animation: wave 2.5s ease-in-out infinite;
+      transform-origin: 70% 70%;
     }
 
-    .divider {
-      width: 60px;
-      height: 3px;
-      background: linear-gradient(90deg, transparent, #ffc72c, transparent);
-      margin: 20px auto;
-      border-radius: 3px;
-      animation: shimmer 3s ease-in-out infinite;
+    @keyframes wave {
+      0%, 60%, 100% { transform: rotate(0deg); }
+      10%, 30% { transform: rotate(14deg); }
+      20% { transform: rotate(-8deg); }
     }
 
-    @keyframes shimmer {
-      0%, 100% { opacity: 0.7; transform: scaleX(1); }
-      50% { opacity: 1; transform: scaleX(1.3); }
+    .hero p {
+      font-size: 14px;
+      color: #64748b;
+      line-height: 1.5;
     }
 
-    /* === MENU CARDS === */
-    .menu {
-      max-width: 500px;
-      margin: 0 auto;
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ============ HORIZONTAL QUICK ACCESS ============ */
+    .section-label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      margin: 22px 0 12px;
+    }
+
+    .section-label h2 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #0a1830;
+      letter-spacing: -0.2px;
+    }
+
+    .section-label span {
+      font-size: 12px;
+      color: #94a3b8;
+      font-weight: 500;
+    }
+
+    .h-scroll {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding: 4px 20px 8px;
+      scrollbar-width: none;
+      scroll-snap-type: x mandatory;
+    }
+
+    .h-scroll::-webkit-scrollbar { display: none; }
+
+    .quick-card {
+      flex-shrink: 0;
+      width: 120px;
+      height: 120px;
+      border-radius: 18px;
+      padding: 14px;
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      justify-content: space-between;
+      text-decoration: none;
+      color: #fff;
+      scroll-snap-align: start;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s;
+      box-shadow: 0 6px 18px rgba(10, 24, 48, 0.15);
     }
 
-    .menu a {
+    .quick-card:active { transform: scale(0.96); }
+
+    .quick-card .qicon {
+      font-size: 28px;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
+    }
+
+    .quick-card .qlabel {
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.25;
+      letter-spacing: 0.1px;
+    }
+
+    /* Card color themes */
+    .quick-card.blue   { background: linear-gradient(135deg, #3b82f6, #1e40af); }
+    .quick-card.gold   { background: linear-gradient(135deg, #fbbf24, #d97706); }
+    .quick-card.green  { background: linear-gradient(135deg, #10b981, #047857); }
+    .quick-card.purple { background: linear-gradient(135deg, #8b5cf6, #6d28d9); }
+    .quick-card.pink   { background: linear-gradient(135deg, #ec4899, #be185d); }
+    .quick-card.teal   { background: linear-gradient(135deg, #06b6d4, #0e7490); }
+
+    /* ============ FEATURED CARD ============ */
+    .featured {
+      margin: 8px 20px 0;
+      padding: 20px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #0a1830, #1e3a8a);
+      color: #fff;
       display: flex;
       align-items: center;
       gap: 16px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 16px;
-      padding: 18px 20px;
       text-decoration: none;
-      color: #fff;
-      font-size: 16px;
-      font-weight: 500;
+      box-shadow: 0 8px 24px rgba(10, 24, 48, 0.25);
       position: relative;
       overflow: hidden;
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      box-shadow:
-        0 4px 16px rgba(0, 0, 0, 0.15),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      animation: fadeUp 0.6s ease-out backwards;
     }
 
-    /* Stagger animations */
-    .menu a:nth-child(1) { animation-delay: 0.1s; }
-    .menu a:nth-child(2) { animation-delay: 0.15s; }
-    .menu a:nth-child(3) { animation-delay: 0.2s; }
-    .menu a:nth-child(4) { animation-delay: 0.25s; }
-    .menu a:nth-child(5) { animation-delay: 0.3s; }
-    .menu a:nth-child(6) { animation-delay: 0.35s; }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Glowing left accent bar */
-    .menu a::before {
+    .featured::after {
       content: '';
       position: absolute;
-      left: 0; top: 0; bottom: 0;
-      width: 4px;
-      background: linear-gradient(180deg, #ffc72c, #ffd966);
-      opacity: 0;
-      transition: opacity 0.3s;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 199, 44, 0.15), transparent 60%);
+      animation: rotate 20s linear infinite;
+      pointer-events: none;
     }
 
-    .menu a:hover::before,
-    .menu a:active::before {
-      opacity: 1;
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
     }
 
-    .menu a:hover,
-    .menu a:active {
-      transform: translateY(-2px);
-      background: rgba(255, 255, 255, 0.1);
-      border-color: rgba(255, 199, 44, 0.5);
-      box-shadow:
-        0 8px 28px rgba(255, 199, 44, 0.25),
-        0 0 0 1px rgba(255, 199, 44, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.15);
-    }
-
-    .menu .icon {
+    .featured .f-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      background: #ffc72c;
+      color: #0a1830;
       font-size: 26px;
-      width: 46px;
-      height: 46px;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 12px;
       flex-shrink: 0;
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      z-index: 1;
+      box-shadow: 0 6px 16px rgba(255, 199, 44, 0.4);
     }
 
-    .menu .label {
+    .featured .f-text {
       flex: 1;
-      font-weight: 500;
-      letter-spacing: 0.2px;
+      z-index: 1;
     }
 
-    .menu .arrow {
+    .featured .f-text strong {
+      display: block;
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 3px;
+    }
+
+    .featured .f-text span {
+      font-size: 12px;
+      color: #93c5fd;
+    }
+
+    .featured .f-arrow {
       color: #ffc72c;
       font-size: 22px;
-      font-weight: 300;
-      transition: transform 0.3s;
+      z-index: 1;
     }
 
-    .menu a:hover .arrow,
-    .menu a:active .arrow {
-      transform: translateX(4px);
+    /* ============ MAIN MENU LIST (iOS style) ============ */
+    .menu-list {
+      margin: 8px 20px 0;
+      background: #fff;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(10, 24, 48, 0.05);
+      border: 1px solid #e8edf3;
     }
 
-    /* === FOOTER === */
+    .menu-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 15px 18px;
+      text-decoration: none;
+      color: #0f172a;
+      border-bottom: 1px solid #f1f5f9;
+      transition: background 0.15s;
+      position: relative;
+    }
+
+    .menu-item:last-child { border-bottom: none; }
+    .menu-item:active { background: #f1f5f9; }
+
+    .menu-item .mi-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    /* icon background colors */
+    .mi-blue   { background: #dbeafe; color: #1e40af; }
+    .mi-gold   { background: #fef3c7; color: #b45309; }
+    .mi-green  { background: #d1fae5; color: #047857; }
+    .mi-purple { background: #ede9fe; color: #6d28d9; }
+    .mi-pink   { background: #fce7f3; color: #be185d; }
+    .mi-teal   { background: #cffafe; color: #0e7490; }
+
+    .menu-item .mi-text { flex: 1; min-width: 0; }
+
+    .menu-item .mi-text strong {
+      display: block;
+      font-size: 15px;
+      font-weight: 600;
+      color: #0f172a;
+      margin-bottom: 2px;
+    }
+
+    .menu-item .mi-text span {
+      font-size: 12px;
+      color: #64748b;
+    }
+
+    .menu-item .mi-arrow {
+      color: #cbd5e1;
+      font-size: 20px;
+    }
+
+    /* ============ FOOTER ============ */
     footer {
       text-align: center;
-      padding: 40px 20px 20px;
+      padding: 30px 20px 20px;
       font-size: 12px;
-      color: #5a7ba8;
+      color: #94a3b8;
       line-height: 1.7;
-      animation: fadeUp 0.8s ease-out 0.4s backwards;
     }
 
-    footer .heart {
-      color: #ffc72c;
+    footer .gold {
+      color: #d97706;
+    }
+
+    /* ============ BOTTOM NAV ============ */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #ffffff;
+      border-top: 1px solid #e2e8f0;
+      padding: 10px 8px 12px;
+      display: flex;
+      justify-content: space-around;
+      z-index: 30;
+      box-shadow: 0 -4px 20px rgba(10, 24, 48, 0.06);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      padding: 6px 4px;
+      text-decoration: none;
+      color: #94a3b8;
+      font-size: 10px;
+      font-weight: 600;
+      transition: color 0.2s;
+      border-radius: 10px;
+    }
+
+    .nav-item .nav-icon {
+      font-size: 20px;
+      transition: transform 0.2s;
+    }
+
+    .nav-item:active .nav-icon {
+      transform: scale(0.9);
+    }
+
+    .nav-item.active {
+      color: #0a1830;
+    }
+
+    .nav-item.active .nav-icon {
+      transform: scale(1.1);
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <div class="logo-circle">LT</div>
-    <h1>BSc Laboratory Technology</h1>
-    <p>University of Cape Coast</p>
-    <div class="divider"></div>
-  </header>
+  <!-- ========== TOP BAR ========== -->
+  <div class="topbar">
+    <div class="brand">
+      <div class="mini-logo">LT</div>
+      <div class="brand-text">
+        <strong>LabTech UCC</strong>
+        <span>BSc Laboratory Technology</span>
+      </div>
+    </div>
+    <div class="menu-icon">☰</div>
+  </div>
 
-  <nav class="menu">
-    <a href="slides.html">
-      <span class="icon">📚</span>
-      <span class="label">Course Slides & Past Questions</span>
-      <span class="arrow">›</span>
+  <!-- ========== HERO ========== -->
+  <div class="hero">
+    <h1>Welcome back <span class="wave">👋</span></h1>
+    <p>Your complete department hub — courses, materials, elections, and more.</p>
+  </div>
+
+  <!-- ========== QUICK ACCESS (Horizontal Scroll) ========== -->
+  <div class="section-label">
+    <h2>Quick Access</h2>
+    <span>Swipe →</span>
+  </div>
+
+  <div class="h-scroll">
+    <a href="slides.html" class="quick-card blue">
+      <div class="qicon">📚</div>
+      <div class="qlabel">Course<br>Materials</div>
+    </a>
+    <a href="courses.html" class="quick-card gold">
+      <div class="qicon">📅</div>
+      <div class="qlabel">Course<br>Structure</div>
+    </a>
+    <a href="voting.html" class="quick-card green">
+      <div class="qicon">🗳️</div>
+      <div class="qlabel">Student<br>Elections</div>
+    </a>
+    <a href="handbook.html" class="quick-card purple">
+      <div class="qicon">📖</div>
+      <div class="qlabel">Student<br>Handbook</div>
+    </a>
+    <a href="books.html" class="quick-card pink">
+      <div class="qicon">📕</div>
+      <div class="qlabel">Book<br>Library</div>
+    </a>
+    <a href="complaints.html" class="quick-card teal">
+      <div class="qicon">📝</div>
+      <div class="qlabel">Submit<br>Complaint</div>
+    </a>
+  </div>
+
+  <!-- ========== FEATURED CARD ========== -->
+  <div class="section-label">
+    <h2>Featured</h2>
+    <span>Latest</span>
+  </div>
+
+  <a href="voting.html" class="featured">
+    <div class="f-icon">🗳️</div>
+    <div class="f-text">
+      <strong>Student Elections Are Open</strong>
+      <span>Cast your vote for 2025/2026 leadership</span>
+    </div>
+    <div class="f-arrow">›</div>
+  </a>
+
+  <!-- ========== MAIN MENU (iOS Style) ========== -->
+  <div class="section-label">
+    <h2>All Sections</h2>
+    <span>6 items</span>
+  </div>
+
+  <div class="menu-list">
+    <a href="slides.html" class="menu-item">
+      <div class="mi-icon mi-blue">📚</div>
+      <div class="mi-text">
+        <strong>Course Slides & Past Questions</strong>
+        <span>Download lecture materials</span>
+      </div>
+      <div class="mi-arrow">›</div>
     </a>
 
-    <a href="courses.html">
-      <span class="icon">📅</span>
-      <span class="label">Course Structure (4 Years)</span>
-      <span class="arrow">›</span>
+    <a href="courses.html" class="menu-item">
+      <div class="mi-icon mi-gold">📅</div>
+      <div class="mi-text">
+        <strong>Course Structure (4 Years)</strong>
+        <span>Full programme outline</span>
+      </div>
+      <div class="mi-arrow">›</div>
     </a>
 
-    <a href="voting.html">
-      <span class="icon">🗳️</span>
-      <span class="label">Student Elections</span>
-      <span class="arrow">›</span>
+    <a href="voting.html" class="menu-item">
+      <div class="mi-icon mi-green">🗳️</div>
+      <div class="mi-text">
+        <strong>Student Elections</strong>
+        <span>Vote for your leaders</span>
+      </div>
+      <div class="mi-arrow">›</div>
     </a>
 
-    <a href="handbook.html">
-      <span class="icon">📖</span>
-      <span class="label">Student Handbook</span>
-      <span class="arrow">›</span>
+    <a href="handbook.html" class="menu-item">
+      <div class="mi-icon mi-purple">📖</div>
+      <div class="mi-text">
+        <strong>Student Handbook</strong>
+        <span>HOD, lecturers & guidelines</span>
+      </div>
+      <div class="mi-arrow">›</div>
     </a>
 
-    <a href="books.html">
-      <span class="icon">📕</span>
-      <span class="label">Book Library</span>
-      <span class="arrow">›</span>
+    <a href="books.html" class="menu-item">
+      <div class="mi-icon mi-pink">📕</div>
+      <div class="mi-text">
+        <strong>Book Library</strong>
+        <span>Recommended textbooks</span>
+      </div>
+      <div class="mi-arrow">›</div>
     </a>
 
-    <a href="complaints.html">
-      <span class="icon">📝</span>
-      <span class="label">Submit a Complaint</span>
-      <span class="arrow">›</span>
+    <a href="complaints.html" class="menu-item">
+      <div class="mi-icon mi-teal">📝</div>
+      <div class="mi-text">
+        <strong>Submit a Complaint</strong>
+        <span>Voice your concerns</span>
+      </div>
+      <div class="mi-arrow">›</div>
     </a>
-  </nav>
+  </div>
 
+  <!-- ========== FOOTER ========== -->
   <footer>
     © 2026 BSc Laboratory Technology<br>
     University of Cape Coast<br>
-    <span class="heart">♥</span> Built by students, for students
+    <span class="gold">♥</span> Built by students, for students
   </footer>
+
+  <!-- ========== BOTTOM NAVIGATION ========== -->
+  <nav class="bottom-nav">
+    <a href="index.html" class="nav-item active">
+      <span class="nav-icon">🏠</span>
+      <span>Home</span>
+    </a>
+    <a href="slides.html" class="nav-item">
+      <span class="nav-icon">📚</span>
+      <span>Materials</span>
+    </a>
+    <a href="voting.html" class="nav-item">
+      <span class="nav-icon">🗳️</span>
+      <span>Vote</span>
+    </a>
+    <a href="books.html" class="nav-item">
+      <span class="nav-icon">📕</span>
+      <span>Books</span>
+    </a>
+    <a href="complaints.html" class="nav-item">
+      <span class="nav-icon">📝</span>
+      <span>Report</span>
+    </a>
+  </nav>
 
 </body>
 </html>
