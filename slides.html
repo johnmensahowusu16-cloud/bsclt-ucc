@@ -1,10 +1,227 @@
-<div id="slides-y1" class="year-block active">
-  <a class="file-card" href="https://drive.google.com/drive/folders/16ftppw-J_Lqe4luGtUDo_XVD-1YwpAJm" target="_blank" rel="noopener" style="border-left-color: #ffc72c; background: linear-gradient(135deg, #fff8e1, #fff);">
-    <div class="file-icon" style="background: #ffc72c; color: #0a2e5c;">📁</div>
-    <div class="file-info">
-      <div class="file-title" style="color: #0a2e5c;">Level 100 – Semester 2</div>
-      <div class="file-meta">All 9 courses • Slides, notes & materials</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Course Slides & Past Questions | BSc LT</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f4f7fb;
+      color: #1a1a1a;
+      min-height: 100vh;
+      padding-bottom: 40px;
+    }
+
+    header {
+      background: linear-gradient(180deg, #0a2e5c 0%, #1e4d8c 100%);
+      color: #fff;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .back-btn {
+      color: #fff;
+      text-decoration: none;
+      font-size: 22px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    header h1 { font-size: 17px; font-weight: 600; }
+    header p { font-size: 12px; color: #c9dcf5; }
+
+    .intro {
+      max-width: 700px;
+      margin: 20px auto;
+      padding: 0 20px;
+      text-align: center;
+      font-size: 14px;
+      color: #4a5568;
+      line-height: 1.6;
+    }
+
+    .section-title {
+      max-width: 700px;
+      margin: 30px auto 14px;
+      padding: 0 20px;
+      font-size: 15px;
+      font-weight: 700;
+      color: #0a2e5c;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title::before {
+      content: '';
+      width: 4px;
+      height: 18px;
+      background: #ffc72c;
+      border-radius: 2px;
+    }
+
+    .folder-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      max-width: 700px;
+      margin: 0 auto 12px;
+      padding: 18px 20px;
+      background: #fff;
+      border-radius: 14px;
+      text-decoration: none;
+      color: #1a1a1a;
+      box-shadow: 0 4px 14px rgba(10, 46, 92, 0.1);
+      border-left: 5px solid #ffc72c;
+      transition: transform 0.2s;
+    }
+
+    .folder-card:active { transform: scale(0.98); }
+
+    .folder-card .icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 12px;
+      background: #ffc72c;
+      color: #0a2e5c;
+      font-size: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .folder-card .info { flex: 1; min-width: 0; }
+
+    .folder-card .label {
+      font-size: 15px;
+      font-weight: 700;
+      color: #0a2e5c;
+      margin-bottom: 4px;
+    }
+
+    .folder-card .desc {
+      font-size: 12px;
+      color: #7a8699;
+      line-height: 1.4;
+    }
+
+    .folder-card .arrow {
+      color: #ffc72c;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .pad { padding: 0 20px; }
+
+    .note {
+      max-width: 700px;
+      margin: 30px auto 0;
+      padding: 16px 20px;
+      background: #fff8e1;
+      border-left: 4px solid #ffc72c;
+      border-radius: 8px;
+      font-size: 13px;
+      color: #6b5a1a;
+      line-height: 1.6;
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="back-btn">←</a>
+    <div>
+      <h1>Course Materials</h1>
+      <p>Slides & Past Questions</p>
     </div>
-    <div class="download-btn" style="color: #0a2e5c;">›</div>
-  </a>
-</div>
+  </header>
+
+  <p class="intro">
+    Tap any folder below to open it. All materials are organised by level and semester.
+  </p>
+
+  <!-- ============ LEVEL 100 ============ -->
+  <h2 class="section-title">Level 100</h2>
+
+  <div class="pad">
+    <a class="folder-card" href="https://drive.google.com/drive/folders/16ftppw-J_Lqe4luGtUDo_XVD-1YwpAJm" target="_blank" rel="noopener">
+      <div class="icon">📁</div>
+      <div class="info">
+        <div class="label">Semester 2 – Slides & Notes</div>
+        <div class="desc">9 courses • Slides & materials</div>
+      </div>
+      <div class="arrow">›</div>
+    </a>
+
+    <a class="folder-card" href="#" target="_blank" rel="noopener" style="opacity: 0.6;">
+      <div class="icon" style="background: #e8f0fb; color: #7a8699;">📁</div>
+      <div class="info">
+        <div class="label">Semester 1 – Coming Soon</div>
+        <div class="desc">Upload link when ready</div>
+      </div>
+      <div class="arrow" style="color: #7a8699;">›</div>
+    </a>
+  </div>
+
+  <!-- ============ LEVEL 200 ============ -->
+  <h2 class="section-title">Level 200</h2>
+
+  <div class="pad">
+    <a class="folder-card" href="#" target="_blank" rel="noopener" style="opacity: 0.6;">
+      <div class="icon" style="background: #e8f0fb; color: #7a8699;">📁</div>
+      <div class="info">
+        <div class="label">Semester 1 & 2 – Coming Soon</div>
+        <div class="desc">Upload folder link when ready</div>
+      </div>
+      <div class="arrow" style="color: #7a8699;">›</div>
+    </a>
+  </div>
+
+  <!-- ============ LEVEL 300 ============ -->
+  <h2 class="section-title">Level 300</h2>
+
+  <div class="pad">
+    <a class="folder-card" href="#" target="_blank" rel="noopener" style="opacity: 0.6;">
+      <div class="icon" style="background: #e8f0fb; color: #7a8699;">📁</div>
+      <div class="info">
+        <div class="label">Semester 1 & 2 – Coming Soon</div>
+        <div class="desc">Upload folder link when ready</div>
+      </div>
+      <div class="arrow" style="color: #7a8699;">›</div>
+    </a>
+  </div>
+
+  <!-- ============ LEVEL 400 ============ -->
+  <h2 class="section-title">Level 400</h2>
+
+  <div class="pad">
+    <a class="folder-card" href="#" target="_blank" rel="noopener" style="opacity: 0.6;">
+      <div class="icon" style="background: #e8f0fb; color: #7a8699;">📁</div>
+      <div class="info">
+        <div class="label">Semester 1 & 2 – Coming Soon</div>
+        <div class="desc">Upload folder link when ready</div>
+      </div>
+      <div class="arrow" style="color: #7a8699;">›</div>
+    </a>
+  </div>
+
+  <div class="note">
+    💡 <strong>To add more folders:</strong> Create a Google Drive folder for each level/semester, set it to "Anyone with the link can view", then update this file with the new links.
+  </div>
+
+</body>
+  </html>
